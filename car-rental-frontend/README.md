@@ -128,3 +128,34 @@ The consumer frontend still uses only `/auth/*` and `/customer/*` for private cu
 
 ## v6.4 live immutable quote UX
 Changing dates or locations immediately invalidates the visible quote and requests a fresh server-side quote. The booking button stays disabled while recalculation is running and only accepts a quote that exactly matches the current selection. Final pricing is recalculated by the backend again on booking creation.
+
+
+## GitHub Pages
+
+The existing frontend is published at **https://eige90.github.io/Septem/**.
+The `Deploy SEPTUM frontend to GitHub Pages` workflow runs on frontend changes to
+`main` and can also be started manually in GitHub Actions.
+
+With `GITHUB_PAGES=true`, Next.js exports the frontend to `out/` and uses
+`/Septem` as its base path. Local `npm run dev` keeps its existing configuration
+and port 3001.
+
+The public API connection is intentionally left unconfigured for now. The
+interface loads, while catalog data, login and booking require a backend.
+The published build does not send requests to the visitor's localhost.
+
+To connect an API later:
+
+1. Set the repository Actions variable `NEXT_PUBLIC_API_BASE_URL` to the public
+   HTTPS API base URL, without `/docs` or a trailing slash.
+2. Allow the origin `https://eige90.github.io` in the API's CORS configuration.
+3. Run the deployment workflow again; Next.js embeds this public URL at build time.
+
+Local preview of the Pages build:
+
+```bash
+npm ci
+GITHUB_PAGES=true npm run build
+```
+
+Serve `out/` beneath `/Septem/` when testing the exported files.

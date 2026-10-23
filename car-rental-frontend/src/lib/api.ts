@@ -11,7 +11,10 @@ import type {
 } from "@/types";
 
 const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://127.0.0.1:8000";
+  (process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://127.0.0.1:8000").replace(
+    /\/+$/,
+    "",
+  );
 
 const TOKEN_KEY = "septum_session";
 
@@ -45,6 +48,14 @@ export function clearStoredToken() {
 }
 
 async function apiRequest<T>(path: string, init?: RequestInit): Promise<T> {
+  if (!API_BASE_URL) {
+    throw new ApiError(
+      "Die Online-Funktionen stehen noch nicht zur Verfügung.",
+      503,
+      null,
+    );
+  }
+
   const token = getStoredToken();
   const response = await fetch(`${API_BASE_URL}${path}`, {
     ...init,
