@@ -54,3 +54,11 @@ Bisher besprochene Entwicklungsziele sind das FastAPI-Backend unter `http://127.
 ---
 
 Built by [Eige90](https://github.com/Eige90).
+
+## GitHub Pages / Website status
+
+**Project URL (availability not independently confirmed):** https://eige90.github.io/Septem/
+
+**English:** Project page is linked; the FastAPI backend cannot run on GitHub Pages. Current live response not confirmed.
+
+**Deutsch:** Projektseite ist verlinkt; das FastAPI-Backend kann nicht auf GitHub Pages laufen. Aktuelle Erreichbarkeit nicht bestätigt.
